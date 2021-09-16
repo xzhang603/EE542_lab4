@@ -117,10 +117,10 @@ int main(int argc, char **argv) {
         close(filefd);
         close(client_sockfd);
         clock_t difference = clock() - start;
-        sec = difference / CLOCKS_PER_SEC;
+        int sec = difference / CLOCKS_PER_SEC;
         struct stat st;
         stat(file_path, &st);
-        size = st.st_size;
+        int size = st.st_size;
         
         printf("%d", size);
         printf("%d", sec);
