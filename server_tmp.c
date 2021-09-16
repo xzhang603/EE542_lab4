@@ -25,6 +25,8 @@ Defaults:
 #include <sys/stat.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <time.h>
+#include <sys/stat.h>
 
 int main(int argc, char **argv) {
     char *file_path = "output.tmp";
@@ -86,6 +88,7 @@ int main(int argc, char **argv) {
     fprintf(stderr, "listening on port %d\n", server_port);
 
     while (1) {
+        clock_t start = clock();
         client_len = sizeof(client_address);
         puts("waiting for client");
         client_sockfd = accept(
@@ -113,6 +116,14 @@ int main(int argc, char **argv) {
         } while (read_return > 0);
         close(filefd);
         close(client_sockfd);
+        clock_t difference = clock() - start;
+        sec = difference / CLOCKS_PER_SEC;
+        struct stat st;
+        stat(file_path, &st);
+        size = st.st_size;
+        
+        printf("%d", size);
+        printf("%d", sec);
     }
     return EXIT_SUCCESS;
 }
