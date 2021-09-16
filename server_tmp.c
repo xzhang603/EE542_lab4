@@ -122,8 +122,11 @@ int main(int argc, char **argv) {
         stat(file_path, &st);
         int size = st.st_size;
         
+        printf("size: ");
         printf("%d", size);
+        printf("  sec: ");
         printf("%d", sec);
+        printf("\n")
     }
     return EXIT_SUCCESS;
 }
