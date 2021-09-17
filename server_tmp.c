@@ -117,16 +117,18 @@ int main(int argc, char **argv) {
         close(filefd);
         close(client_sockfd);
         clock_t difference = clock() - start;
-        int sec = difference / CLOCKS_PER_SEC;
+        int sec = difference * 1000 / CLOCKS_PER_SEC;
         struct stat st;
         stat(file_path, &st);
         int size = st.st_size;
         
         printf("size: ");
         printf("%d", size);
-        printf("  sec: ");
+        printf("  sec(ms): ");
         printf("%d", sec);
-        printf("\n")
+        printf("throughput: ");
+        printf("%d", size / (sec * 1000));
+        printf("\n");
     }
     return EXIT_SUCCESS;
 }
