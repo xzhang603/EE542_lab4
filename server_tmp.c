@@ -117,18 +117,25 @@ int main(int argc, char **argv) {
         close(filefd);
         close(client_sockfd);
         clock_t difference = clock() - start;
-        int sec = difference * 1000 / CLOCKS_PER_SEC;
+        int msec = difference * 1000 / CLOCKS_PER_SEC;
         struct stat st;
         stat(file_path, &st);
         int size = st.st_size;
-        
         printf("size: ");
         printf("%d", size);
         printf("  sec(ms): ");
-        printf("%d", sec);
-        printf("throughput: ");
-        printf("%d", size * 1000 / sec);
-        printf("\n");
+        printf("%d", msec);
+
+
+
+        int new_msec = msec;
+        double avg_tp = size / (new_msec * 1.0);
+        avg_tp = avg_tp / 1000.0;
+        double sec = msec / 1000;
+
+        printf("  Speed: ");
+        printf("%f", avg_tp);
+        printf("MB/s \n");
     }
     return EXIT_SUCCESS;
 }
