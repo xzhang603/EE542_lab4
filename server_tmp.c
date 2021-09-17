@@ -127,7 +127,7 @@ int main(int argc, char **argv) {
         printf("  sec(ms): ");
         printf("%d", sec);
         printf("throughput: ");
-        printf("%d", size / (sec * 1000));
+        printf("%d", size * 1000 / sec);
         printf("\n");
     }
     return EXIT_SUCCESS;
