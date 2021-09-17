@@ -116,6 +116,8 @@ int main(int argc, char **argv) {
         } while (read_return > 0);
         close(filefd);
         close(client_sockfd);
+        
+        //Timer
         clock_t difference = clock() - start;
         int msec = difference * 1000 / CLOCKS_PER_SEC;
         struct stat st;
@@ -125,8 +127,6 @@ int main(int argc, char **argv) {
         printf("%d", size);
         printf("  sec(ms): ");
         printf("%d", msec);
-
-
 
         int new_msec = msec;
         double avg_tp = size / (new_msec * 1.0);
